@@ -1,0 +1,52 @@
+{
+  "name": "trabalho-9-tratamento-de-restricoes",
+  "version": "1.0.0",
+  "description": "Trabalho 9 - Tratamento de restricoes",
+  "type": "module",
+  "main": "electron/main.js",
+  "scripts": {
+    "desktop": "electron .",
+    "dist": "electron-builder --win portable",
+    "pack": "electron-builder --dir",
+    "start": "node server.js",
+    "verify": "node verify.js"
+  },
+  "keywords": [
+    "algoritmo-genetico",
+    "restricoes",
+    "ga",
+    "penalizacao",
+    "deb"
+  ],
+  "author": "Mateus Flausino Conceicao",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^41.0.4",
+    "electron-builder": "^26.8.1"
+  },
+  "build": {
+    "appId": "br.edu.ufu.trabalho9",
+    "productName": "Trabalho 9",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "electron/**/*",
+      "img/**/*",
+      "src/**/*",
+      "index.html",
+      "styles.css",
+      "server.js",
+      "package.json",
+      "README.md",
+      "Relatorio.md"
+    ],
+    "win": {
+      "artifactName": "Trabalho-9-portable-${version}.${ext}",
+      "signAndEditExecutable": false,
+      "target": [
+        "portable"
+      ]
+    }
+  }
+}

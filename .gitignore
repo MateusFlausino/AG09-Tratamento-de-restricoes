@@ -1,0 +1,5 @@
+node_modules/
+dist/
+*.log
+qa_docx/
+prints/*.tmp

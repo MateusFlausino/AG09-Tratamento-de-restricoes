@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trabalho 9</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="backdrop"></div>
+    <div class="page-shell">
+      <header class="hero panel">
+        <div class="hero-header">
+          <div class="hero-copy">
+            <p class="eyebrow">Curso de Mestrado Academico em Engenharia Eletrica</p>
+            <h1>Trabalho 09 - Tratamento de Restri&ccedil;&otilde;es</h1>
+            <p class="lead">12612EEL011 - Mateus Flausino Concei&ccedil;&atilde;o</p>
+          </div>
+          <div class="hero-divider" aria-hidden="true"></div>
+          <div class="hero-brand-side" aria-label="Identidade institucional">
+            <img class="side-logo side-logo-ufu" src="./img/ufu.png" alt="Logo da UFU" />
+            <img class="side-logo side-logo-pos" src="./img/pos.png" alt="Logo da Pos-Eletrica UFU" />
+          </div>
+        </div>
+      </header>
+
+      <main class="main-grid">
+        <section class="panel controls-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="section-kicker">Simulacao</p>
+              <h2>Controles</h2>
+            </div>
+            <p id="statusBanner" class="status-banner">Inicializando AG restrito...</p>
+          </div>
+
+          <div class="controls-row">
+            <button id="stepButton" class="action-button primary">Executar 1 geracao</button>
+            <button id="autoButton" class="action-button secondary">Execucao automatica</button>
+            <button id="batchButton" class="action-button accent">Rodar 30 execucoes</button>
+            <button id="resetButton" class="action-button ghost">Reiniciar</button>
+          </div>
+
+          <div class="speed-panel">
+            <label for="speedSlider">Velocidade da simulacao</label>
+            <input id="speedSlider" type="range" min="1" max="12" value="5" />
+            <span id="speedValue">5 geracoes/s</span>
+          </div>
+
+          <div class="config-panel">
+            <label for="methodSelect">Metodo de tratamento</label>
+            <select id="methodSelect" class="number-input">
+              <option value="deb">Factivel primeiro (Deb)</option>
+              <option value="penalty">Penalizacao estatica</option>
+            </select>
+          </div>
+
+          <div class="config-grid">
+            <label>
+              Populacao
+              <input id="populationInput" class="number-input" type="number" min="10" max="200" value="60" />
+            </label>
+            <label>
+              Geracoes
+              <input id="generationInput" class="number-input" type="number" min="20" max="500" value="180" />
+            </label>
+          </div>
+          <span class="field-hint">O desafio do PowerPoint foi incorporado: 30 execucoes com media e desvio padrao.</span>
+
+          <div class="stats-grid">
+            <article class="stat-card glow">
+              <span class="stat-label">Geracao</span>
+              <strong id="generationValue">0</strong>
+            </article>
+            <article class="stat-card">
+              <span class="stat-label">Melhor vetor</span>
+              <strong id="bestXValue">0.000</strong>
+            </article>
+            <article class="stat-card">
+              <span class="stat-label">Melhor f(x)</span>
+              <strong id="bestFxValue">0.000000</strong>
+            </article>
+            <article class="stat-card">
+              <span class="stat-label">Violacao media</span>
+              <strong id="averageViolationValue">0.000000</strong>
+            </article>
+            <article class="stat-card">
+              <span class="stat-label">Factiveis</span>
+              <strong id="feasibilityValue">0%</strong>
+            </article>
+          </div>
+        </section>
+
+        <section class="panel arena-panel">
+          <div class="panel-heading compact">
+            <div>
+              <h2>Espaco de Busca Restrito</h2>
+            </div>
+            <p id="studyFunctionValue" class="compact-note arena-note">
+              min f(x), sujeito a x1 + x2 <= 4; x1 >= 2; x2 >= 1
+            </p>
+          </div>
+          <div class="canvas-shell">
+            <canvas id="arenaCanvas" width="1280" height="680"></canvas>
+          </div>
+          <div class="legend-row">
+            <span><i class="swatch feasible"></i>Regiao factivel</span>
+            <span><i class="swatch infeasible"></i>Regiao penalizada</span>
+            <span><i class="swatch agents"></i>Populacao</span>
+            <span><i class="swatch champion"></i>Campeao atual</span>
+          </div>
+
+          <div class="performance-block">
+            <div class="panel-heading compact">
+              <div>
+                <p class="section-kicker">Estatistica</p>
+                <h2>Resultado das 30 execucoes</h2>
+              </div>
+              <p id="batchStatus" class="compact-note">Clique em Rodar 30 execucoes para gerar media e desvio padrao.</p>
+            </div>
+            <div class="summary-grid">
+              <article>
+                <span>Media f(x)</span>
+                <strong id="meanValue">-</strong>
+              </article>
+              <article>
+                <span>Desvio padrao</span>
+                <strong id="stdValue">-</strong>
+              </article>
+              <article>
+                <span>Taxa factivel</span>
+                <strong id="batchFeasibleValue">-</strong>
+              </article>
+              <article>
+                <span>Melhor / pior</span>
+                <strong id="rangeValue">-</strong>
+              </article>
+            </div>
+            <div class="canvas-shell performance-shell">
+              <canvas id="performanceCanvas" width="1280" height="360"></canvas>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel sidebar-panel">
+          <div class="panel-heading compact">
+            <div>
+              <p class="section-kicker">Resultados</p>
+              <h2>Melhores individuos</h2>
+            </div>
+            <p id="objectiveValue" class="compact-note">Objetivo: minimizar f(x)</p>
+          </div>
+
+          <div id="leaderboard" class="leaderboard"></div>
+        </section>
+      </main>
+    </div>
+
+    <script type="module" src="./src/app.js"></script>
+  </body>
+</html>
