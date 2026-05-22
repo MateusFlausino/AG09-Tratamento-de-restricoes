@@ -1,6 +1,6 @@
 # Trabalho 09 - Tratamento de Restricoes
 
-Aplicacao interativa para demonstrar o tratamento de restricoes em Algoritmos Geneticos. O projeto segue a organizacao do Trabalho 08, mas adapta o problema para uma otimizacao restrita e incorpora o desafio indicado no PowerPoint: realizar 30 execucoes do AG e apresentar media e desvio padrao dos resultados.
+Aplicacao interativa para demonstrar o tratamento de restricoes em Algoritmos Geneticos.
 
 ## Problema
 
